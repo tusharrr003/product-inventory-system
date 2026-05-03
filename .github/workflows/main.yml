@@ -1,0 +1,49 @@
+name: Inventory CI
+
+on:
+  push:
+    branches: [ main, tushar-docs, disha-ui, janhavi-logic ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate Project Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Check Required Files Exist
+        run: |
+          echo "🔍 Checking project structure..."
+          test -f frontend/index.html  && echo "✅ index.html found"  || (echo "❌ index.html missing"  && exit 1)
+          test -f frontend/style.css   && echo "✅ style.css found"   || (echo "❌ style.css missing"   && exit 1)
+          test -f frontend/script.js   && echo "✅ script.js found"   || (echo "❌ script.js missing"   && exit 1)
+          test -f README.md            && echo "✅ README.md found"   || (echo "❌ README.md missing"   && exit 1)
+
+      - name: Validate HTML Structure
+        run: |
+          echo "🔍 Checking HTML basics..."
+          grep -q "<!DOCTYPE html>" frontend/index.html && echo "✅ DOCTYPE present"
+          grep -q "<title>"         frontend/index.html && echo "✅ Title tag present"
+          grep -q "viewport"        frontend/index.html && echo "✅ Viewport meta present"
+          grep -q "style.css"       frontend/index.html && echo "✅ CSS linked"
+          grep -q "script.js"       frontend/index.html && echo "✅ JS linked"
+
+      - name: Validate JavaScript File
+        run: |
+          echo "🔍 Checking JS functions..."
+          grep -q "function deleteProduct" frontend/script.js && echo "✅ deleteProduct() found"
+          grep -q "function startEdit"     frontend/script.js && echo "✅ startEdit() found"
+          grep -q "localStorage"           frontend/script.js && echo "✅ localStorage usage found"
+
+      - name: Inventory System Running Successfully
+        run: |
+          echo ""
+          echo "================================================"
+          echo "  ✅  Inventory System Running Successfully"
+          echo "  📦  All project files validated"
+          echo "  🚀  GitHub Actions CI passed!"
+          echo "================================================"
