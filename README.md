@@ -51,7 +51,7 @@ inventory-system/
 ├── frontend/
 │   ├── index.html    ← Main page (Disha)
 │   ├── style.css     ← Styling & layout (Disha)
-│   └── script.js     ← JS logic & localStorage (Janhavi)
+│   └── script.js     ← JS logic & localStorage (Tejaswini)
 │
 ├── .github/
 │   └── workflows/
@@ -69,7 +69,7 @@ inventory-system/
 | `main` | — | Production-ready code |
 | `tushar-docs` | Tushar | GitHub setup, CI config, README |
 | `disha-ui` | Disha | HTML structure & CSS styling |
-| `janhavi-logic` | Janhavi | JavaScript logic & local storage |
+| `tejaswini-logic` | Tejaswini | JavaScript logic & local storage |
 
 ---
 
@@ -99,7 +99,7 @@ The `.github/workflows/main.yml` pipeline runs on every push and pull request. I
 |---|---|---|
 | **Tushar** | GitHub & Docs | Repo setup, branching, GitHub Actions, README |
 | **Disha** | UI Design | `index.html` structure, `style.css` styling |
-| **Janhavi** | Logic | `script.js` — CRUD, localStorage, search |
+| **Tejaswini** | Logic | `script.js` — CRUD, localStorage, search, filter |
 
 ---
 
@@ -107,7 +107,7 @@ The `.github/workflows/main.yml` pipeline runs on every push and pull request. I
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/product-inventory-system.git
+   git clone https://github.com/tusharrr003/product-inventory-system.git
    cd product-inventory-system
    ```
 2. Open `frontend/index.html` in your browser — **done!**

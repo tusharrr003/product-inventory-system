@@ -2,7 +2,7 @@ name: Inventory CI
 
 on:
   push:
-    branches: [ main, tushar-docs, disha-ui, janhavi-logic ]
+    branches: [ main, tushar-docs, disha-ui, tejaswini-logic ]
   pull_request:
     branches: [ main ]
 
@@ -38,6 +38,7 @@ jobs:
           grep -q "function deleteProduct" frontend/script.js && echo "✅ deleteProduct() found"
           grep -q "function startEdit"     frontend/script.js && echo "✅ startEdit() found"
           grep -q "localStorage"           frontend/script.js && echo "✅ localStorage usage found"
+          grep -q "renderTable"            frontend/script.js && echo "✅ renderTable() found"
 
       - name: Inventory System Running Successfully
         run: |
