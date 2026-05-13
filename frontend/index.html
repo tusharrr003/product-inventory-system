@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Product Inventory System — manage your products with add, update, delete and search features." />
+  <title>📦 Product Inventory System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">📦</span>
+        <div>
+          <h1 class="brand-title">Product Inventory</h1>
+          <p class="brand-sub">Real-time stock management</p>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="stat-card" id="stat-total-products">
+          <span class="stat-value" id="totalProductCount">0</span>
+          <span class="stat-label">Products</span>
+        </div>
+        <div class="stat-card highlight" id="stat-total-value">
+          <span class="stat-value" id="totalInventoryValue">₹0</span>
+          <span class="stat-label">Total Value</span>
+        </div>
+        <div class="stat-card danger" id="stat-low-stock">
+          <span class="stat-value" id="lowStockCount">0</span>
+          <span class="stat-label">Low Stock</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== LOW STOCK ALERT BANNER ===== -->
+  <div class="alert-banner" id="lowStockBanner" style="display:none;">
+    <span class="alert-icon">⚠️</span>
+    <span id="lowStockMessage">Some products are running low on stock!</span>
+    <button class="alert-close" id="closeBannerBtn" onclick="closeBanner()">✕</button>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-container">
+
+    <!-- ===== ADD / EDIT FORM ===== -->
+    <section class="form-section card" aria-label="Add or Edit Product">
+      <div class="section-header">
+        <h2 class="section-title" id="formTitle">➕ Add New Product</h2>
+      </div>
+
+      <form id="productForm" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="productName">Product Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="productName"
+              name="productName"
+              placeholder="e.g. Wireless Mouse"
+              maxlength="80"
+              autocomplete="off"
+              required
+            />
+            <span class="error-msg" id="nameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="productCategory">Category <span class="required">*</span></label>
+            <select id="productCategory" name="productCategory" required>
+              <option value="">— Select Category —</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Food">Food</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Sports">Sports</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="error-msg" id="categoryError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="productPrice">Price (₹) <span class="required">*</span></label>
+            <input
+              type="number"
+              id="productPrice"
+              name="productPrice"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              required
+            />
+            <span class="error-msg" id="priceError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="productQuantity">Quantity <span class="required">*</span></label>
+            <input
+              type="number"
+              id="productQuantity"
+              name="productQuantity"
+              placeholder="0"
+              min="0"
+              step="1"
+              required
+            />
+            <span class="error-msg" id="quantityError"></span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span class="btn-icon">➕</span> Add Product
+          </button>
+          <button type="button" class="btn btn-secondary" id="cancelEditBtn" onclick="cancelEdit()" style="display:none;">
+            ✕ Cancel Edit
+          </button>
+          <button type="reset" class="btn btn-ghost" id="clearFormBtn" onclick="clearForm()">
+            🔄 Clear
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== SEARCH & FILTER BAR ===== -->
+    <section class="filter-section card" aria-label="Search and Filter">
+      <div class="filter-row">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by product name..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="filter-controls">
+          <select id="filterCategory">
+            <option value="">All Categories</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Food">Food</option>
+            <option value="Stationery">Stationery</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Sports">Sports</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <select id="sortField">
+            <option value="name">Sort: Name</option>
+            <option value="price">Sort: Price</option>
+            <option value="quantity">Sort: Quantity</option>
+            <option value="category">Sort: Category</option>
+          </select>
+
+          <button class="btn btn-icon-only" id="sortOrderBtn" title="Toggle Sort Order" onclick="toggleSortOrder()">
+            <span id="sortOrderIcon">↑↓</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUCT TABLE ===== -->
+    <section class="table-section card" aria-label="Product Inventory Table">
+      <div class="table-header-row">
+        <h2 class="section-title">📋 Inventory</h2>
+        <span class="results-count" id="resultsCount">Showing 0 products</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="inventoryTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Price (₹)</th>
+              <th>Quantity</th>
+              <th>Stock Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody">
+            <!-- Rows injected by script.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-icon">📭</div>
+        <p class="empty-title">No products found</p>
+        <p class="empty-sub">Add your first product using the form above.</p>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="paginationContainer">
+        <button class="btn btn-ghost btn-sm" id="prevPageBtn" onclick="changePage(-1)">← Prev</button>
+        <span class="page-info" id="pageInfo">Page 1 of 1</span>
+        <button class="btn btn-ghost btn-sm" id="nextPageBtn" onclick="changePage(1)">Next →</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== DELETE CONFIRMATION MODAL ===== -->
+  <div class="modal-overlay" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle" style="display:none;">
+    <div class="modal">
+      <div class="modal-icon">🗑️</div>
+      <h3 class="modal-title" id="deleteModalTitle">Delete Product?</h3>
+      <p class="modal-message" id="deleteModalMessage">This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
+        <button class="btn btn-ghost" id="cancelDeleteBtn" onclick="closeDeleteModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATIONS ===== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>📦 Product Inventory System &mdash; TA3 Academic Project &mdash; 2026</p>
+    <p class="footer-team">Built by <strong>Tushar</strong>, <strong>Disha</strong> &amp; <strong>Tejaswini</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
