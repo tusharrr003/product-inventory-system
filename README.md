@@ -1,44 +1,125 @@
-# 📌 Product Inventory System
+# 📦 Product Inventory System
 
-## 📌 Description
-A web-based application to manage product inventory including adding, updating, and deleting products. It is built with a dynamic, beautiful UI.
-
-## 📌 Features
-### ✅ Core Features
-* Add product
-* Update stock
-* Delete product
-* View inventory
-
-### ⭐ Bonus Features
-* Search Product
-* Low Stock Warning
-* Total Inventory Value
-* Save data using Local Storage
-
-## 📌 Tech Stack
-* HTML
-* CSS
-* JavaScript
-
-## 📌 Team Members
-* **Tushar** – GitHub & Documentation
-* **Disha** – UI Design
-* **Janhavi** – Logic
+> A web-based application to manage product inventory — add, update, delete, and view products in real time with local storage persistence.
 
 ---
-## 📊 Short Report
 
-### 1. Project Description
-The Product Inventory System is a front-end application built to manage a store's stock. It allows users to intuitively add new products with names, prices, and quantities. The system displays a live inventory table where users can update stock counts as shipments arrive or delete products when they are no longer sold. It automatically calculates the total monetary value of the current inventory and warns the user if any item falls below a set stock threshold. All changes are saved directly in the browser's local storage to ensure data persistence across sessions.
+## 🖥️ Live Demo
 
-### 2. GitHub Workflow Used
-* **Branching**: Created separate branches for each team member's specific roles (e.g., `tushar-docs`, `disha-ui`, `janhavi-logic`).
-* **Pull Requests**: Code changes are submitted via Pull Requests to facilitate code review and safe integration.
-* **Merging**: Pull Requests are merged into the `main` branch once approved.
-* **GitHub Actions**: Configured CI via `.github/workflows/main.yml` to automatically verify that the codebase is valid on every push.
+Open `frontend/index.html` directly in any modern browser. No server required.
 
-### 3. Contribution of Members
-* **Tushar**: Responsible for repository setup, managing branches and merges, setting up the CI workflow using GitHub actions, and drafting this comprehensive README and Report.
-* **Disha**: Led the UI Design, structuring the semantic HTML components, styling the vibrant and dynamic interface using pure CSS, and creating the form layout for adding products.
-* **Janhavi**: Engineered the JavaScript logic for application state management, handling add/update/delete operations, dynamically rendering the DOM table, calculating total inventory value, and implementing local storage persistence.
+---
+
+## 📌 Features
+
+### ✅ Core Features
+| Feature | Description |
+|---|---|
+| ➕ Add Product | Add a product with name, price, quantity, and category |
+| ✏️ Update Stock | Edit any existing product's details |
+| 🗑️ Delete Product | Remove a product with confirmation dialog |
+| 📋 View Inventory | Paginated, sortable product table |
+
+### ⭐ Bonus Features
+| Feature | Description |
+|---|---|
+| 🔍 Search | Real-time search by product name |
+| 🏷️ Filter | Filter by category |
+| ⚠️ Low Stock Warning | Alert banner + badge for qty ≤ 5 |
+| 💰 Total Inventory Value | Auto-calculated in header |
+| 💾 Local Storage | Data persists across browser sessions |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Structure | HTML5 |
+| Styling | CSS3 (Vanilla — glassmorphism, animations) |
+| Logic | JavaScript (ES6+) |
+| Storage | Browser `localStorage` |
+| CI/CD | GitHub Actions |
+
+---
+
+## 🗂️ Folder Structure
+
+```
+inventory-system/
+│
+├── frontend/
+│   ├── index.html    ← Main page (Disha)
+│   ├── style.css     ← Styling & layout (Disha)
+│   └── script.js     ← JS logic & localStorage (Tejaswini)
+│
+├── .github/
+│   └── workflows/
+│       └── main.yml  ← GitHub Actions CI (Tushar)
+│
+└── README.md         ← This file (Tushar)
+```
+
+---
+
+## 🌿 Branch Strategy
+
+| Branch | Owner | Purpose |
+|---|---|---|
+| `main` | — | Production-ready code |
+| `tushar-docs` | Tushar | GitHub setup, CI config, README |
+| `disha-ui` | Disha | HTML structure & CSS styling |
+| `tejaswini-logic` | Tejaswini | JavaScript logic & local storage |
+
+---
+
+## 🔄 GitHub Workflow Used
+
+1. **Branching** — Each member works on their own feature branch
+2. **Commits** — Descriptive commit messages for every change
+3. **Pull Requests** — Code reviewed before merging into `main`
+4. **Merging** — PRs merged after review
+5. **GitHub Actions** — CI pipeline validates project files on every push/PR
+
+---
+
+## ⚙️ GitHub Actions (CI)
+
+The `.github/workflows/main.yml` pipeline runs on every push and pull request. It:
+- Checks that all required files exist (`index.html`, `style.css`, `script.js`, `README.md`)
+- Validates HTML structure (DOCTYPE, title, viewport meta, linked CSS/JS)
+- Validates JS file (required functions + localStorage usage)
+- Prints a success message on pass
+
+---
+
+## 👨‍💻 Team Members
+
+| Member | Role | Contribution |
+|---|---|---|
+| **Tushar** | GitHub & Docs | Repo setup, branching, GitHub Actions, README |
+| **Disha** | UI Design | `index.html` structure, `style.css` styling |
+| **Tejaswini** | Logic | `script.js` — CRUD, localStorage, search, filter |
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tusharrr003/product-inventory-system.git
+   cd product-inventory-system
+   ```
+2. Open `frontend/index.html` in your browser — **done!**
+
+---
+
+## 📸 Screenshots
+
+> *(Add screenshots of the running app, GitHub branches, Pull Requests, and Actions here)*
+
+---
+
+## 📄 License
+
+This project is created for educational purposes as part of TA3 academic assessment.
