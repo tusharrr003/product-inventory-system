@@ -13,17 +13,19 @@ Developed as part of the **B.Tech Honors (Semester 4) TA3 Assessment** to demons
 
 ---
 
-## 🖥️ Live Demo & Quick Start
+## 🌐 Live Demo & Deployment
 
-The application runs entirely client-side without requiring Node.js, external package managers, or server installations.
+🚀 **Live Deployment URL:** **[https://tusharrr003.github.io/product-inventory-system/](https://tusharrr003.github.io/product-inventory-system/)**
 
-### Option 1: Direct File Launch
+The application is deployed automatically to GitHub Pages on every push to `main`. It also runs entirely client-side without requiring Node.js, external package managers, or server installations.
+
+### Running Locally:
 1. Clone the repository:
    ```bash
    git clone https://github.com/tusharrr003/product-inventory-system.git
    cd product-inventory-system
    ```
-2. Double-click [frontend/index.html](file:///d:/Tushar/Btech/honors/sem%204/TA3_project/inventory-system/frontend/index.html) or open it directly in any modern browser (Chrome, Edge, Firefox, Safari).
+2. Double-click [frontend/index.html](file:///d:/Tushar/Btech/honors/sem%204/TA3_project/inventory-system/frontend/index.html) or open it directly in any modern browser.
 
 ### Option 2: Local Static Server (Optional)
 ```bash
